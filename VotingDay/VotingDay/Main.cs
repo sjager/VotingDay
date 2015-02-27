@@ -16,6 +16,7 @@ namespace VotingDay
     {
         private DataTable voteCounts = new DataTable();
         private Mode mode;
+        private Form _analyzeForm ;
 
         public enum Mode
         {
@@ -99,6 +100,7 @@ namespace VotingDay
             VoteCounts.AutoResizeColumns();
             RestoreDefaults();
             ItemCount.Enabled = true;
+            AnalyzeButton.Click += AnalyzePlurality;
         }
 
         private void SetupCumulative_Click(object sender, EventArgs e)
@@ -115,6 +117,7 @@ namespace VotingDay
             ItemCount.Enabled = true;
             CustomLabel.Visible = true;
             CustomInput.Visible = true;
+            AnalyzeButton.Click += AnalyzeCumulative;
         }
 
         private void SetupApproval_Click(object sender, EventArgs e)
@@ -127,6 +130,7 @@ namespace VotingDay
             VoteCounts.DataSource = voteCounts;
             VoteCounts.AutoResizeColumns();
             RestoreDefaults();
+            AnalyzeButton.Click += AnalyzeApproval;
             ItemCount.Enabled = true;
         }
 
@@ -145,7 +149,9 @@ namespace VotingDay
                 {
                     voteCounts.Columns.Add(i.ToString(), typeof (int));
                 }
-                
+
+                AnalyzeButton.Click += AnalyzeBorda;
+
                 VoteCounts.DataSource = voteCounts;
                 VoteCounts.AutoResizeColumns();
             }
@@ -183,6 +189,8 @@ namespace VotingDay
                 CustomButton.Visible = true;
                 CustomButton.Click += AdvanceRound;
 
+                AnalyzeButton.Click += AnalyzePluralityWithElimination;
+
                 VoteCounts.DataSource = voteCounts;
                 VoteCounts.AutoResizeColumns();
             }
@@ -213,7 +221,6 @@ namespace VotingDay
                     VoteCounts.Rows[minIndex].Cells[i].Style.BackColor = Color.Red;
                     VoteCounts.Rows[minIndex].Cells[i].ReadOnly = true;
                 }
-
                 CustomInput.Text = (tempRound + 1).ToString();
             }
             else
@@ -239,6 +246,40 @@ namespace VotingDay
             list.RemoveHandler(obj, list[obj]);
         }
 
-        //TODO write analysis handlers
+        private void AnalyzePlurality(object sender, EventArgs e)
+        {
+            _analyzeForm = new Plurality(voteCounts);
+            _analyzeForm.Show();
+        }
+
+        private void AnalyzeCumulative(object sender, EventArgs e)
+        {
+            _analyzeForm = new Cumulative(voteCounts);
+            _analyzeForm.Show();
+        }
+
+        private void AnalyzeApproval(object sender, EventArgs e)
+        {
+            _analyzeForm = new Approval(voteCounts);
+            _analyzeForm.Show();
+        }
+
+        private void AnalyzeBorda(object sender, EventArgs e)
+        {
+            _analyzeForm = new Borda(voteCounts);
+            _analyzeForm.Show();
+        }
+
+        private void AnalyzePluralityWithElimination(object sender, EventArgs e)
+        {
+            _analyzeForm = new PluralityWithElimination(voteCounts);
+            _analyzeForm.Show();
+        }
+
+        private void AnalyzePairwise(object sender, EventArgs e)
+        {
+            _analyzeForm = new PairwiseElimination(voteCounts);
+            _analyzeForm.Show();
+        }
     }
 }

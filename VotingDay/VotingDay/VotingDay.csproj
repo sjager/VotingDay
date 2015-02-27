@@ -44,16 +44,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Approval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Approval.Designer.cs">
+      <DependentUpon>Approval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Borda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Borda.Designer.cs">
+      <DependentUpon>Borda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cumulative.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cumulative.Designer.cs">
+      <DependentUpon>Cumulative.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="PairwiseElimination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PairwiseElimination.Designer.cs">
+      <DependentUpon>PairwiseElimination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plurality.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plurality.Designer.cs">
+      <DependentUpon>Plurality.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PluralityWithElimination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PluralityWithElimination.Designer.cs">
+      <DependentUpon>PluralityWithElimination.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Approval.resx">
+      <DependentUpon>Approval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Borda.resx">
+      <DependentUpon>Borda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cumulative.resx">
+      <DependentUpon>Cumulative.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PairwiseElimination.resx">
+      <DependentUpon>PairwiseElimination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plurality.resx">
+      <DependentUpon>Plurality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PluralityWithElimination.resx">
+      <DependentUpon>PluralityWithElimination.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
