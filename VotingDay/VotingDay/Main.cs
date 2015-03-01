@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Configuration;
 using System.Reflection;
@@ -16,7 +18,8 @@ namespace VotingDay
     {
         private DataTable voteCounts = new DataTable();
         private Mode mode;
-        private Form _analyzeForm ;
+        private Form _analyzeForm;
+        public List<string> MovieTitleList = new List<string>();
 
         public enum Mode
         {
@@ -52,9 +55,9 @@ namespace VotingDay
             {
                 if (voteCounts.Rows.Count < temp)
                 {
-                    for (var i = voteCounts.Rows.Count+1; i <= temp; i++)
+                    for (var i = voteCounts.Rows.Count; i < temp; i++)
                     {
-                        voteCounts.Rows.Add(i, "", 0);
+                        voteCounts.Rows.Add(i, MovieTitleList.Count() > i ? MovieTitleList[i] : "", 0);
                     }
                 }
                 else
@@ -74,7 +77,7 @@ namespace VotingDay
             {
                 if (voteCounts.Rows.Count < temp)
                 {
-                    for (var i = voteCounts.Rows.Count + 1; i <= temp; i++)
+                    for (var i = voteCounts.Rows.Count; i < temp; i++)
                     {
                         voteCounts.Rows.Add("Team " + i);
                     }
@@ -145,7 +148,7 @@ namespace VotingDay
                 TeamCount.Enabled = true;
                 ItemCount.Enabled = false;
                 voteCounts.Columns.Add("Team Name");
-                for (var i = 1; i <= temp; i++)
+                for (var i = 0; i < temp; i++)
                 {
                     voteCounts.Columns.Add(i.ToString(), typeof (int));
                 }
@@ -171,12 +174,12 @@ namespace VotingDay
                 RestoreDefaults();
                 ItemCount.Enabled = false;
                 voteCounts.Columns.Add("Item Number");
-                for (var i = 1; i <= temp; i++)
+                for (var i = 0; i < temp; i++)
                 {
                     voteCounts.Columns.Add("Round " + i.ToString(), typeof(int));
                 }
 
-                for (var i = 1; i <= temp; i++)
+                for (var i = 0; i < temp; i++)
                 {
                     voteCounts.Rows.Add(i.ToString());
                 }
@@ -281,5 +284,53 @@ namespace VotingDay
             _analyzeForm = new PairwiseElimination(voteCounts);
             _analyzeForm.Show();
         }
+
+        private void ImportItemNamesButton_Click(object sender, EventArgs e)
+        {
+            var dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var filename = dlg.FileName;
+
+                string sFileContents = "";
+
+                using (StreamReader oStreamReader = new StreamReader(File.OpenRead(filename)))
+                {
+                    sFileContents = oStreamReader.ReadToEnd();
+                }
+
+                string[] sFileLines = sFileContents.Split(Environment.NewLine.ToCharArray(),
+                    StringSplitOptions.RemoveEmptyEntries);
+                foreach (string sFileLine in sFileLines)
+                {
+                    MovieTitleList.Add(sFileLine.Contains(",") ? sFileLine.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).First() : sFileLine);
+                }
+                ImportItemNamesButton.Text = MovieTitleList.Count() + " items imported";
+            }
+        }
+
+        private void VoteCounts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var clipboard = Clipboard.GetText();
+            string[] clipboardRows = clipboard.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            var row = e.RowIndex;
+            for (var i = 0; i < clipboardRows.Length; i++, row++)
+            {
+                var clipboardCols = clipboardRows[i].Split(",".ToCharArray());
+                var col = e.ColumnIndex;
+                for (var j = 0; j < clipboardCols.Length; j++, col++)
+                {
+                    try
+                    {
+                        voteCounts.Rows[row][col] = clipboardCols[j];
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        
+                    }
+                }
+            }
+        } 
     }
 }

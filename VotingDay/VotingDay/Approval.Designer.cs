@@ -33,13 +33,12 @@
             // 
             // DismissButton
             // 
-            this.DismissButton.Location = new System.Drawing.Point(102, 210);
+            this.DismissButton.Location = new System.Drawing.Point(202, 221);
             this.DismissButton.Name = "DismissButton";
             this.DismissButton.Size = new System.Drawing.Size(70, 28);
             this.DismissButton.TabIndex = 1;
             this.DismissButton.Text = "Ok";
             this.DismissButton.UseVisualStyleBackColor = true;
-            this.DismissButton.Click += DismissButton_Click;
             // 
             // Approval
             // 

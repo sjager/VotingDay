@@ -43,6 +43,7 @@
             this.CustomInput = new System.Windows.Forms.TextBox();
             this.AnalyzeButton = new System.Windows.Forms.Button();
             this.CustomButton = new System.Windows.Forms.Button();
+            this.ImportItemNamesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.VoteCounts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +58,7 @@
             this.VoteCounts.Size = new System.Drawing.Size(361, 209);
             this.VoteCounts.TabIndex = 0;
             this.VoteCounts.Tag = "VoteCounts";
+            this.VoteCounts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.VoteCounts_CellDoubleClick);
             // 
             // ItemNumberInputLabel
             // 
@@ -96,7 +98,7 @@
             // 
             // SetupPlurality
             // 
-            this.SetupPlurality.Location = new System.Drawing.Point(393, 17);
+            this.SetupPlurality.Location = new System.Drawing.Point(393, 43);
             this.SetupPlurality.Name = "SetupPlurality";
             this.SetupPlurality.Size = new System.Drawing.Size(154, 33);
             this.SetupPlurality.TabIndex = 5;
@@ -106,7 +108,7 @@
             // 
             // SetupCumulative
             // 
-            this.SetupCumulative.Location = new System.Drawing.Point(393, 56);
+            this.SetupCumulative.Location = new System.Drawing.Point(393, 82);
             this.SetupCumulative.Name = "SetupCumulative";
             this.SetupCumulative.Size = new System.Drawing.Size(154, 33);
             this.SetupCumulative.TabIndex = 6;
@@ -116,7 +118,7 @@
             // 
             // SetupApproval
             // 
-            this.SetupApproval.Location = new System.Drawing.Point(393, 95);
+            this.SetupApproval.Location = new System.Drawing.Point(393, 121);
             this.SetupApproval.Name = "SetupApproval";
             this.SetupApproval.Size = new System.Drawing.Size(154, 33);
             this.SetupApproval.TabIndex = 7;
@@ -126,7 +128,7 @@
             // 
             // SetupBorda
             // 
-            this.SetupBorda.Location = new System.Drawing.Point(393, 134);
+            this.SetupBorda.Location = new System.Drawing.Point(393, 160);
             this.SetupBorda.Name = "SetupBorda";
             this.SetupBorda.Size = new System.Drawing.Size(154, 33);
             this.SetupBorda.TabIndex = 8;
@@ -136,7 +138,7 @@
             // 
             // SetupPluralityElimination
             // 
-            this.SetupPluralityElimination.Location = new System.Drawing.Point(393, 173);
+            this.SetupPluralityElimination.Location = new System.Drawing.Point(393, 199);
             this.SetupPluralityElimination.Name = "SetupPluralityElimination";
             this.SetupPluralityElimination.Size = new System.Drawing.Size(154, 33);
             this.SetupPluralityElimination.TabIndex = 9;
@@ -146,7 +148,7 @@
             // 
             // SetupPairwise
             // 
-            this.SetupPairwise.Location = new System.Drawing.Point(393, 212);
+            this.SetupPairwise.Location = new System.Drawing.Point(393, 238);
             this.SetupPairwise.Name = "SetupPairwise";
             this.SetupPairwise.Size = new System.Drawing.Size(154, 33);
             this.SetupPairwise.TabIndex = 10;
@@ -191,11 +193,22 @@
             this.CustomButton.UseVisualStyleBackColor = true;
             this.CustomButton.Visible = false;
             // 
+            // ImportItemNamesButton
+            // 
+            this.ImportItemNamesButton.Location = new System.Drawing.Point(392, 4);
+            this.ImportItemNamesButton.Name = "ImportItemNamesButton";
+            this.ImportItemNamesButton.Size = new System.Drawing.Size(154, 33);
+            this.ImportItemNamesButton.TabIndex = 15;
+            this.ImportItemNamesButton.Text = "Import Item Names";
+            this.ImportItemNamesButton.UseVisualStyleBackColor = true;
+            this.ImportItemNamesButton.Click += new System.EventHandler(this.ImportItemNamesButton_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(558, 341);
+            this.Controls.Add(this.ImportItemNamesButton);
             this.Controls.Add(this.CustomButton);
             this.Controls.Add(this.AnalyzeButton);
             this.Controls.Add(this.CustomInput);
@@ -236,6 +249,7 @@
         private System.Windows.Forms.TextBox CustomInput;
         private System.Windows.Forms.Button AnalyzeButton;
         private System.Windows.Forms.Button CustomButton;
+        private System.Windows.Forms.Button ImportItemNamesButton;
     }
 }
 
