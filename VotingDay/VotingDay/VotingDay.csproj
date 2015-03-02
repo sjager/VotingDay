@@ -56,6 +56,8 @@
     <Compile Include="Borda.Designer.cs">
       <DependentUpon>Borda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Candidate.cs" />
+    <Compile Include="CondorcetAnalyzer.cs" />
     <Compile Include="Cumulative.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +90,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VotingResults.cs" />
     <EmbeddedResource Include="Approval.resx">
       <DependentUpon>Approval.cs</DependentUpon>
     </EmbeddedResource>
