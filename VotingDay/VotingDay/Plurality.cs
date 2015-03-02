@@ -16,6 +16,7 @@ namespace VotingDay
         {
 
             InitializeComponent();
+            //DisplayPreferences.DataSource = displayPreferences;
 
             Dictionary<int, int> dictionary =
 	            new Dictionary<int, int>();
@@ -30,6 +31,7 @@ namespace VotingDay
             //sort dictionary
             List<KeyValuePair<int, int>> myList = dictionary.ToList();
 
+
             myList.Sort(
                 delegate(KeyValuePair<int, int> firstPair,
                 KeyValuePair<int, int> nextPair)
@@ -42,10 +44,13 @@ namespace VotingDay
                 myList.ToDictionary(pair => pair.Key, pair => pair.Value);
 
             DataTable table = new DataTable("Order");
-            for (int i = 0; i < 2; i++)
-            {
-                table.Columns.Add();
-            }
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    table.Columns.Add();
+            //}
+
+            table.Columns.Add("id", typeof(int));
+            table.Columns.Add("count", typeof(int));
             foreach (int id in sortedDictionary.Keys)
             {
                 DataRow newRow = table.Rows.Add();
@@ -55,26 +60,11 @@ namespace VotingDay
                 newRow.ItemArray = rowArray;
             }
 
-            int a = 0;
-
-
-     
+            DisplayPreferences.DataSource = table;
+            DisplayPreferences.AutoResizeColumns();
         }
 
-        ////TODO fix all of this
-        //private DataTable displayPreferences;
-        //private void displayOrder(object sender, EventArgs e)
-        //{
-        //    displayPreferences = new DataTable();
-        //    displayPreferences.Columns.Add("id", typeof(int));
-        //    //voteCounts.Columns.Add("name", typeof(string));
-        //    displayPreferences.Columns.Add("count", typeof(int));
-        //    DisplayPreferences.DataSource = displayPreferences;
-        //    DisplayPreferences.AutoResizeColumns();
-        //    RestoreDefaults();
-        //    //ItemCount.Enabled = true;
-        //    //AnalyzeButton.Click += AnalyzePlurality;
-        //}
+     
 
         private void DismissButton_Click(object sender, EventArgs e)
         {
