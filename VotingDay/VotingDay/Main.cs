@@ -251,7 +251,7 @@ namespace VotingDay
 
         private void AnalyzePlurality(object sender, EventArgs e)
         {
-            _analyzeForm = new Plurality(voteCounts);
+            _analyzeForm = new Plurality(voteCounts, MovieTitleList);
             _analyzeForm.Show();
         }
 
