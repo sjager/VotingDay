@@ -30,6 +30,7 @@
         {
             this.DismissButton = new System.Windows.Forms.Button();
             this.approvalAnalysisDataGrid = new System.Windows.Forms.DataGridView();
+            this.sendEmailButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.approvalAnalysisDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,11 +51,22 @@
             this.approvalAnalysisDataGrid.Size = new System.Drawing.Size(410, 232);
             this.approvalAnalysisDataGrid.TabIndex = 2;
             // 
+            // sendEmailButton
+            // 
+            this.sendEmailButton.Location = new System.Drawing.Point(305, 353);
+            this.sendEmailButton.Name = "sendEmailButton";
+            this.sendEmailButton.Size = new System.Drawing.Size(75, 23);
+            this.sendEmailButton.TabIndex = 3;
+            this.sendEmailButton.Text = "Send Email";
+            this.sendEmailButton.UseVisualStyleBackColor = true;
+            this.sendEmailButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Approval
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 423);
+            this.Controls.Add(this.sendEmailButton);
             this.Controls.Add(this.approvalAnalysisDataGrid);
             this.Controls.Add(this.DismissButton);
             this.Name = "Approval";
@@ -68,5 +80,6 @@
 
         private System.Windows.Forms.Button DismissButton;
         private System.Windows.Forms.DataGridView approvalAnalysisDataGrid;
+        private System.Windows.Forms.Button sendEmailButton;
     }
 }
