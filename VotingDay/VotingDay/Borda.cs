@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Diagnostics;
+
 namespace VotingDay
 {
     public partial class Borda : Form
@@ -91,6 +93,40 @@ namespace VotingDay
                     }
 
                     var orderedListTemp = bordaCountTemp.ToList().OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]);  
+
+
+                    int[] orderArray = new int[input.Columns.Count - 2];
+                    int[] tempArray = new int[input.Columns.Count - 2] ;
+                    int k = 0;
+                    foreach (var item in orderedList)
+                    {
+                        if (item.Key != j)
+                        {
+                            orderArray[k] = item.Key;
+                            k++;
+                        }
+                    }
+                    k = 0;
+                    foreach (var item in orderedListTemp)
+                    {
+                        if (item.Key != j)
+                        {
+                        tempArray[k] = item.Key;
+                        k++;
+                        }
+
+                    }
+
+
+                    if (!orderArray.SequenceEqual(tempArray))
+                    {
+                        if (orderArray[0] != tempArray[0])
+                        {
+                            Debug.WriteLine("winner spoiler: ");
+                        }
+                        Debug.WriteLine(movieTitles[j]);
+                    }
+
 
                 }
 
