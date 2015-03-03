@@ -185,13 +185,13 @@ namespace VotingDay
             }
 
             Exporter exporter = new Exporter(dataGridView1);
-            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls",rowToHighlight);
+            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls", rowToHighlight);
 
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm(exportFilePath, 6);
+            EmailForm emailForm = new EmailForm(exportFilePath, 6, "Data is in bracket order, with each column representing a round of competition. The winner of each \"bracket\" is marked by a \"1\", and the overall winner is highlighted.");
             emailForm.Show();
         }
     }

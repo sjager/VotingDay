@@ -24,6 +24,15 @@ namespace VotingDay
             subjectTextBox.Text += (" " + roundNumber);
         }
 
+        public EmailForm(string filepath, int roundNumber, string body)
+        {
+            InitializeComponent();
+            Filepath = filepath;
+            attachmenTextBox.Text = Filepath;
+            subjectTextBox.Text += (" " + roundNumber);
+            bodyTextBox.Text = body;
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
