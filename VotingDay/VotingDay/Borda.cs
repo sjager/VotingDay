@@ -12,9 +12,14 @@ namespace VotingDay
 {
     public partial class Borda : Form
     {
+        private DataTable data;
+        private List<string> movies; 
+
         public Borda(DataTable input, List<string> movieTitles)
         {
             InitializeComponent();
+            data = input;
+            movies = movieTitles;
             var bordaCount = new Dictionary<int, int>();
             for (var i = 0; i < input.Columns.Count - 1; i++)
             {
@@ -52,11 +57,39 @@ namespace VotingDay
                 dataGridView1.DataSource = dataSource;
                 dataGridView1.AutoResizeColumns();
 
+                var BordaWinner = orderedList.First().Key;
+                //var condorcetWinner = false;
+                var condorcetSpoilers = orderedList.Skip(1).Where(i => EvaluateWinner(BordaWinner, i.Key) != BordaWinner).Select(x => movies[x.Key]).ToList();
+
+
+                if (condorcetSpoilers.Any())
+                {
+                    this.label1.Text = "The condorcet condition is RUINED by these movies: " + condorcetSpoilers.Aggregate((x, y) => x + " " + y);
+                }
+                else
+                {
+                    this.label1.Text = "The condorcet condition is satisfied";
+                }
             }
             else
             {
                 //TODO error
             }
+        }
+
+        private int EvaluateWinner(int contestant1, int contestant2)
+        {
+            var comparison = 0;
+            for (var i = 0; i < data.Rows.Count; i++)
+            {
+                comparison += (Convert.ToInt32(data.Rows[i].ItemArray[contestant1 + 1]) > Convert.ToInt32(data.Rows[i].ItemArray[contestant2 + 1]) ? 1 : -1);
+            }
+
+            return comparison > 0
+                ? contestant1
+                : comparison < 0
+                    ? contestant2
+                    : movies[contestant1].CompareTo(movies[contestant2]) < 0 ? contestant1 : contestant2;
         }
 
         private void DismissButton_Click(object sender, EventArgs e)
