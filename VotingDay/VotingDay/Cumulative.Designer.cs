@@ -30,6 +30,7 @@
         {
             this.DismissButton = new System.Windows.Forms.Button();
             this.cumulativeAnalysisDataGrid = new System.Windows.Forms.DataGridView();
+            this.exportButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cumulativeAnalysisDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,11 +51,22 @@
             this.cumulativeAnalysisDataGrid.Size = new System.Drawing.Size(357, 150);
             this.cumulativeAnalysisDataGrid.TabIndex = 2;
             // 
+            // exportButton
+            // 
+            this.exportButton.Location = new System.Drawing.Point(279, 228);
+            this.exportButton.Name = "exportButton";
+            this.exportButton.Size = new System.Drawing.Size(75, 23);
+            this.exportButton.TabIndex = 3;
+            this.exportButton.Text = "Export";
+            this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            // 
             // Cumulative
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(407, 317);
+            this.Controls.Add(this.exportButton);
             this.Controls.Add(this.cumulativeAnalysisDataGrid);
             this.Controls.Add(this.DismissButton);
             this.Name = "Cumulative";
@@ -68,5 +80,6 @@
 
         private System.Windows.Forms.Button DismissButton;
         private System.Windows.Forms.DataGridView cumulativeAnalysisDataGrid;
+        private System.Windows.Forms.Button exportButton;
     }
 }
