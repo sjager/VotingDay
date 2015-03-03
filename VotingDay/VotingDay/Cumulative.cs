@@ -12,6 +12,7 @@ namespace VotingDay
 {
     public partial class Cumulative : Form
     {
+        public string exportFilePath;
         public Cumulative(DataTable input)
         {
             InitializeComponent();
@@ -64,7 +65,13 @@ namespace VotingDay
         private void exportButton_Click(object sender, EventArgs e)
         {
             Exporter exporter = new Exporter(cumulativeAnalysisDataGrid);
-            exporter.ExportToExcel("Round2_Amirite");
+            exportFilePath = exporter.ExportToExcel("Round2_Amirite");
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath);
+            emailForm.Show();
         }
     }
 }

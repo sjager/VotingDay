@@ -37,7 +37,7 @@
             // 
             // DismissButton
             // 
-            this.DismissButton.Location = new System.Drawing.Point(111, 307);
+            this.DismissButton.Location = new System.Drawing.Point(82, 307);
             this.DismissButton.Name = "DismissButton";
             this.DismissButton.Size = new System.Drawing.Size(70, 28);
             this.DismissButton.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             // exportButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(221, 307);
+            this.exportButton.Location = new System.Drawing.Point(167, 307);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(75, 23);
             this.exportButton.TabIndex = 3;
@@ -64,7 +64,7 @@
             // 
             // sendEmailButton
             // 
-            this.sendEmailButton.Location = new System.Drawing.Point(324, 347);
+            this.sendEmailButton.Location = new System.Drawing.Point(248, 307);
             this.sendEmailButton.Name = "sendEmailButton";
             this.sendEmailButton.Size = new System.Drawing.Size(75, 23);
             this.sendEmailButton.TabIndex = 4;
