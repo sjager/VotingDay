@@ -17,6 +17,7 @@ namespace VotingDay
     public partial class Main : Form
     {
         private DataTable voteCounts = new DataTable();
+        private DataTable preferenceOrders = new DataTable();
         private Mode mode;
         private Form _analyzeForm;
         public List<string> MovieTitleList = new List<string>();
@@ -75,18 +76,18 @@ namespace VotingDay
             int temp;
             if (Int32.TryParse(TeamCount.Text, out temp))
             {
-                if (voteCounts.Rows.Count < temp)
+                if (preferenceOrders.Rows.Count < temp)
                 {
-                    for (var i = voteCounts.Rows.Count; i < temp; i++)
+                    for (var i = preferenceOrders.Rows.Count; i < temp; i++)
                     {
-                        voteCounts.Rows.Add("Team " + i);
+                        preferenceOrders.Rows.Add("Team " + i);
                     }
                 }
                 else
                 {
-                    for (var i = voteCounts.Rows.Count - 1; i >= temp; i--)
+                    for (var i = preferenceOrders.Rows.Count - 1; i >= temp; i--)
                     {
-                        voteCounts.Rows.Remove(voteCounts.Rows[i]);
+                        preferenceOrders.Rows.Remove(preferenceOrders.Rows[i]);
                     }
                 }
             }
@@ -140,22 +141,22 @@ namespace VotingDay
         private void SetupBorda_Click(object sender, EventArgs e)
         {
             mode = Mode.Borda;
-            voteCounts = new DataTable();
+            preferenceOrders = new DataTable();
             int temp;
             if (Int32.TryParse(ItemCount.Text, out temp))
             {
                 RestoreDefaults();
                 TeamCount.Enabled = true;
                 ItemCount.Enabled = false;
-                voteCounts.Columns.Add("Team Name");
+                preferenceOrders.Columns.Add("Team Name");
                 for (var i = 0; i < temp; i++)
                 {
-                    voteCounts.Columns.Add(i.ToString(), typeof (int));
+                    preferenceOrders.Columns.Add(i.ToString(), typeof (int));
                 }
 
                 AnalyzeButton.Click += AnalyzeBorda;
 
-                VoteCounts.DataSource = voteCounts;
+                VoteCounts.DataSource = preferenceOrders;
                 VoteCounts.AutoResizeColumns();
             }
             else
@@ -248,7 +249,12 @@ namespace VotingDay
         private void SetupPairwise_Click(object sender, EventArgs e)
         {
             mode = Mode.PairwiseElimination;
-            //TODO figure out what goes here
+            RestoreDefaults();
+            AnalyzeButton.Click += AnalyzePairwise;
+
+            //Use table from borda voting
+            VoteCounts.DataSource = preferenceOrders;
+            VoteCounts.AutoResizeColumns();
         }
 
         private void RemoveClickEvent(Button b)
@@ -294,7 +300,7 @@ namespace VotingDay
 
         private void AnalyzePairwise(object sender, EventArgs e)
         {
-            _analyzeForm = new PairwiseElimination(voteCounts);
+            _analyzeForm = new PairwiseElimination(preferenceOrders, MovieTitleList);
             _analyzeForm.Show();
         }
 
