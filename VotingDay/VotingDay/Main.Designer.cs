@@ -224,6 +224,7 @@
             this.Controls.Add(this.ItemCount);
             this.Controls.Add(this.ItemNumberInputLabel);
             this.Controls.Add(this.VoteCounts);
+            this.KeyPreview = true;
             this.Name = "Main";
             this.Text = "Main";
             ((System.ComponentModel.ISupportInitialize)(this.VoteCounts)).EndInit();
