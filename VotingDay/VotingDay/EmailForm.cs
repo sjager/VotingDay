@@ -16,11 +16,12 @@ namespace VotingDay
     public partial class EmailForm : Form
     {
         public string Filepath;
-        public EmailForm(string filepath)
+        public EmailForm(string filepath, int roundNumber)
         {
             InitializeComponent();
             Filepath = filepath;
             attachmenTextBox.Text = Filepath;
+            subjectTextBox.Text += (" " + roundNumber);
         }
 
         private void label1_Click(object sender, EventArgs e)

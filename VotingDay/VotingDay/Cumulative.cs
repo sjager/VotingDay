@@ -44,6 +44,8 @@ namespace VotingDay
 
             cumulativeAnalysisDataGrid.Columns.AddRange(new DataGridViewColumn[] { rankCol, nameCol, votesCol });
 
+            cumulativeAnalysisDataGrid.Rows.Add("Rank", "Name", "Votes");
+
             int rank = 1;
             foreach(Candidate c in results.Candidates)
             {
@@ -65,12 +67,12 @@ namespace VotingDay
         private void exportButton_Click(object sender, EventArgs e)
         {
             Exporter exporter = new Exporter(cumulativeAnalysisDataGrid);
-            exportFilePath = exporter.ExportToExcel("Round2_Amirite");
+            exportFilePath = exporter.ExportToExcel("Round2_Amirite",2);
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm(exportFilePath);
+            EmailForm emailForm = new EmailForm(exportFilePath, 2);
             emailForm.Show();
         }
     }
