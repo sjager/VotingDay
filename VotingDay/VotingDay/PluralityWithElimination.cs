@@ -12,6 +12,7 @@ namespace VotingDay
 {
     public partial class PluralityWithElimination : Form
     {
+        public string exportFilePath;
         public PluralityWithElimination(DataTable input, List<string> movieTitles)
         {
             InitializeComponent();
@@ -55,6 +56,18 @@ namespace VotingDay
         private void DismissButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            Exporter exporter = new Exporter(dataGridView1);
+            exportFilePath = exporter.ExportToExcel("Round5_Amirite.xls",1);
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath, 5);
+            emailForm.Show();
         }
     }
 }

@@ -64,7 +64,16 @@
     <Compile Include="Cumulative.Designer.cs">
       <DependentUpon>Cumulative.cs</DependentUpon>
     </Compile>
+
+    <Compile Include="EmailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmailForm.Designer.cs">
+      <DependentUpon>EmailForm.cs</DependentUpon>
+    </Compile>
+
     <Compile Include="Exporter.cs" />
+
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +86,7 @@
     <Compile Include="PairwiseElimination.Designer.cs">
       <DependentUpon>PairwiseElimination.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paste.cs" />
     <Compile Include="Plurality.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cumulative.resx">
       <DependentUpon>Cumulative.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmailForm.resx">
+      <DependentUpon>EmailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

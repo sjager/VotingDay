@@ -12,8 +12,9 @@ namespace VotingDay
 {
     public partial class PairwiseElimination : Form
     {
+        public string exportFilePath;
         private DataTable indata;
-        private List<string> movies;
+        private List<string> movies; 
         private DataTable outTable;
 
         public PairwiseElimination(DataTable input, List<string> movieTitles)
@@ -153,7 +154,7 @@ namespace VotingDay
         private int GetPlace(int contestant)
         {
             var i = 1;
-            while (Convert.ToInt32(outTable.Rows[contestant][i]) == 1)
+            while (i < outTable.Columns.Count && Convert.ToInt32(outTable.Rows[contestant][i]) == 1)
             {
                 i++;
             }
@@ -163,6 +164,20 @@ namespace VotingDay
         private void DismissButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+
+            Exporter exporter = new Exporter(dataGridView1);
+            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls",1);
+
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath, 6);
+            emailForm.Show();
         }
     }
 }
