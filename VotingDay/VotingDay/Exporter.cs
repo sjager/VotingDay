@@ -40,17 +40,8 @@ namespace VotingDay
                 }
             }
 
-
-            Range cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 1];
-            cellRange.Interior.Color = ConvertColour(Color.Yellow);
-
-            cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 2];
-            cellRange.Interior.Color = ConvertColour(Color.Yellow);
-
-            cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 3];
-            cellRange.Interior.Color = ConvertColour(Color.Yellow);
-
-
+                Range cellRange = xlWorkSheet.Range[xlWorkSheet.Cells[rowToHighlight, 1], xlWorkSheet.Cells[rowToHighlight, dataGridView.ColumnCount]];
+                cellRange.Interior.Color = ConvertColour(Color.Yellow);
 
             xlWorkBook.SaveAs(filename, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
 

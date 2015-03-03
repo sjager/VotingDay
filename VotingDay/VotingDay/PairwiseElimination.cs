@@ -168,9 +168,17 @@ namespace VotingDay
 
         private void exportButton_Click(object sender, EventArgs e)
         {
+            var rowToHighlight = 1;
+            for (var i = 0; i < outTable.Rows.Count; i++)
+            {
+                if (Convert.ToInt32(outTable.Rows[i][outTable.Columns.Count - 1]) == 1)
+                {
+                    rowToHighlight = i+1;
+                }
+            }
 
             Exporter exporter = new Exporter(dataGridView1);
-            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls",1);
+            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls",rowToHighlight);
 
         }
 
