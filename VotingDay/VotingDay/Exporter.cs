@@ -18,7 +18,7 @@ namespace VotingDay
             this.dataGridView = dg;
         }
 
-        public string ExportToExcel(string filename)
+        public string ExportToExcel(string filename, int rowToHighlight)
         {
             Excel.Application xlApp ;
             Excel.Workbook xlWorkBook ;
@@ -41,13 +41,13 @@ namespace VotingDay
             }
 
 
-            Range cellRange = (Range)xlWorkSheet.Cells[1, 1];
+            Range cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 1];
             cellRange.Interior.Color = ConvertColour(Color.Yellow);
 
-            cellRange = (Range)xlWorkSheet.Cells[1, 2];
+            cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 2];
             cellRange.Interior.Color = ConvertColour(Color.Yellow);
 
-            cellRange = (Range)xlWorkSheet.Cells[1, 3];
+            cellRange = (Range)xlWorkSheet.Cells[rowToHighlight, 3];
             cellRange.Interior.Color = ConvertColour(Color.Yellow);
 
 

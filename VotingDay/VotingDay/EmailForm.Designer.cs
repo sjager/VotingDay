@@ -100,7 +100,8 @@
             this.bodyTextBox.Name = "bodyTextBox";
             this.bodyTextBox.Size = new System.Drawing.Size(100, 20);
             this.bodyTextBox.TabIndex = 6;
-            this.bodyTextBox.Text = "We have attached our output to this email.";
+            this.bodyTextBox.Text = "We have attached our output to this email. The items are sorted by highest to low" +
+    "est preference from top to bottom.";
             // 
             // label4
             // 

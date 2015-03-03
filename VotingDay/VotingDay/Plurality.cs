@@ -69,12 +69,12 @@ namespace VotingDay
         private void exportButton_Click(object sender, EventArgs e)
         {
             Exporter exporter = new Exporter(DisplayPreferences);
-            exportFilePath = exporter.ExportToExcel("Round1_Amirite.xls");
+            exportFilePath = exporter.ExportToExcel("Round1_Amirite.xls",1);
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm(exportFilePath);
+            EmailForm emailForm = new EmailForm(exportFilePath, 1);
             emailForm.Show();
         }
     }

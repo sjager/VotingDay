@@ -70,13 +70,13 @@ namespace VotingDay
         {
 
             Exporter exporter = new Exporter(approvalAnalysisDataGrid);
-            exportFilePath = exporter.ExportToExcel("Round3_Amirite.xls");
+            exportFilePath = exporter.ExportToExcel("Round3_Amirite.xls",2);
             
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm(exportFilePath);
+            EmailForm emailForm = new EmailForm(exportFilePath, 3);
             emailForm.Show();
         }
     }
