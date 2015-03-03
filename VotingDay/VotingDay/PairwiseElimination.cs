@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -83,7 +84,7 @@ namespace VotingDay
                 
                 if (!paretoDominated.Any())
                 {
-                    label1.Text = "No Pareto Domination exists";
+                    Debug.WriteLine("No Pareto Domination exists");
                 }
                 else
                 {
@@ -92,8 +93,8 @@ namespace VotingDay
                         int underdog;
                         if (GetPlace(paretoDominated[i]) > GetPlace(paretoDominates[i]))
                         {
-                            label1.Text = movies[paretoDominated[i]] + " was dominated by " + movies[paretoDominates[i]] +
-                                          " but finished higher";
+                            Debug.WriteLine(movies[paretoDominated[i]] + " was dominated by " + movies[paretoDominates[i]] +
+                                          " but finished higher");
                             break;
                         }
                     }
@@ -117,8 +118,8 @@ namespace VotingDay
                         if (temp1 >= 0 && temp2 >= 0)
                         {
                             // condition for underdog winning has been found.
-                            label1.Text += "\r\n   \"Pareto dominated\" " + movies[paretoDominated[i]] + " beats " + movies[temp2] + " and \"pareto dominating\" " +
-                            movies[paretoDominates[i]] + " is beaten by " + movies[temp1];
+                            Debug.WriteLine("\"Pareto dominated\" " + movies[paretoDominated[i]] + " beats " + movies[temp2] + " and \"pareto dominating\" " +
+                            movies[paretoDominates[i]] + " is beaten by " + movies[temp1]);
                             break;
                         }
                     }

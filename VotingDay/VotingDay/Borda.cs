@@ -67,11 +67,11 @@ namespace VotingDay
 
                 if (condorcetSpoilers.Any())
                 {
-                    this.label1.Text = "The condorcet condition is RUINED by these movies: " + condorcetSpoilers.Aggregate((x, y) => x + " " + y);
+                    Debug.WriteLine("The condorcet condition is RUINED by these movies: " + condorcetSpoilers.Aggregate((x, y) => x + " " + y));
                 }
                 else
                 {
-                    this.label1.Text = "The condorcet condition is satisfied";
+                    Debug.WriteLine("The condorcet condition is satisfied");
                 }
 
                 //remove each column
