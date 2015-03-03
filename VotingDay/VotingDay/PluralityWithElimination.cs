@@ -28,9 +28,7 @@ namespace VotingDay
             List<KeyValuePair<int, int>> myList = dictionary.ToList();
 
 
-            myList.Sort(
-                (firstPair, nextPair) => nextPair.Value.CompareTo(firstPair.Value)
-                );
+            myList.OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]);
 
             IDictionary<int, int> sortedDictionary =
                 myList.ToDictionary(pair => pair.Key, pair => pair.Value);
