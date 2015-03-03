@@ -91,13 +91,13 @@ namespace VotingDay
         {
 
             Exporter exporter = new Exporter(dataGridView1);
-            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls");
+            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls",1);
 
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm(exportFilePath);
+            EmailForm emailForm = new EmailForm(exportFilePath, 6);
             emailForm.Show();
         }
     }
