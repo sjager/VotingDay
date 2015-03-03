@@ -288,7 +288,7 @@ namespace VotingDay
 
         private void AnalyzePluralityWithElimination(object sender, EventArgs e)
         {
-            _analyzeForm = new PluralityWithElimination(voteCounts);
+            _analyzeForm = new PluralityWithElimination(voteCounts, MovieTitleList);
             _analyzeForm.Show();
         }
 
