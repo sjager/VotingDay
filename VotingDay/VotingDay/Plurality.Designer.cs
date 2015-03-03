@@ -47,10 +47,13 @@
             // 
             // DisplayPreferences
             // 
+            this.DisplayPreferences.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DisplayPreferences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DisplayPreferences.Location = new System.Drawing.Point(0, 0);
             this.DisplayPreferences.Name = "DisplayPreferences";
-            this.DisplayPreferences.Size = new System.Drawing.Size(240, 150);
+            this.DisplayPreferences.Size = new System.Drawing.Size(272, 184);
             this.DisplayPreferences.TabIndex = 1;
             // 
             // exportButton

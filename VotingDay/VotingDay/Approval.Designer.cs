@@ -46,6 +46,9 @@
             // 
             // approvalAnalysisDataGrid
             // 
+            this.approvalAnalysisDataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.approvalAnalysisDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.approvalAnalysisDataGrid.Location = new System.Drawing.Point(12, 12);
             this.approvalAnalysisDataGrid.Name = "approvalAnalysisDataGrid";
