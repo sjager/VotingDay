@@ -67,7 +67,7 @@ namespace VotingDay
         private void exportButton_Click(object sender, EventArgs e)
         {
             Exporter exporter = new Exporter(cumulativeAnalysisDataGrid);
-            exportFilePath = exporter.ExportToExcel("Round2_Amirite",2);
+            exportFilePath = exporter.ExportToExcel("Round2_Amirite.xls",2);
         }
 
         private void sendEmailButton_Click(object sender, EventArgs e)
