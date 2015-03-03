@@ -181,7 +181,7 @@ namespace VotingDay
 
                 for (var i = 0; i < temp; i++)
                 {
-                    voteCounts.Rows.Add(i.ToString());
+                    voteCounts.Rows.Add(MovieTitleList[i]);
                 }
 
                 CustomLabel.Text = "Round:";
@@ -212,19 +212,32 @@ namespace VotingDay
                 int minIndex = 0, minValue = Int32.MaxValue, temp1; 
                 for (var i = 0; i < tempItemCount; i++)
                 {
-                    if (Int32.TryParse(voteCounts.Rows[i][tempRound].ToString(), out temp1) && temp1 < minValue)
+                    if (VoteCounts.Rows[i].Cells[tempRound].Style.BackColor != Color.Red && Int32.TryParse(voteCounts.Rows[i][tempRound].ToString(), out temp1) && temp1 <= minValue)
                     {
-                        minIndex = i;
+                        if (temp1 < minValue)
+                        {
+                            minIndex = i;
+                        } else if (temp1 == minValue && MovieTitleList[i].CompareTo(MovieTitleList[minIndex]) > 0)
+                        {
+                            minIndex = i;
+                        }
                         minValue = temp1;
                     }
                 }
 
                 for (var i = tempRound; i <= tempItemCount; i++)
                 {
-                    VoteCounts.Rows[minIndex].Cells[i].Style.BackColor = Color.Red;
-                    VoteCounts.Rows[minIndex].Cells[i].ReadOnly = true;
+                    for (var j = 0; j < VoteCounts.RowCount; j++)
+                    {
+                        if (j == minIndex)
+                        {
+                            VoteCounts.Rows[j].Cells[i].Style.BackColor = Color.Red;
+                            VoteCounts.Rows[minIndex].Cells[i].ReadOnly = true;
+                        }
+                        VoteCounts.Rows[j].Cells[i].Value = Convert.ToInt32(voteCounts.Rows[j][tempRound]);
+                    }
                 }
-                CustomInput.Text = (tempRound + 1).ToString();
+                CustomInput.Text = (++tempRound).ToString();
             }
             else
             {
@@ -275,7 +288,7 @@ namespace VotingDay
 
         private void AnalyzePluralityWithElimination(object sender, EventArgs e)
         {
-            _analyzeForm = new PluralityWithElimination(voteCounts);
+            _analyzeForm = new PluralityWithElimination(voteCounts, MovieTitleList);
             _analyzeForm.Show();
         }
 
