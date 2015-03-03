@@ -34,7 +34,7 @@ namespace VotingDay
                     }
                 }
 
-                var orderedList = bordaCount.ToList().OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]);
+                var orderedList = bordaCount.ToList().OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]);     
                 var dataSource = new DataTable("Borda Results");
                 dataSource.Columns.Add("id", typeof(int));
                 dataSource.Columns.Add("name", typeof (string));
@@ -51,6 +51,48 @@ namespace VotingDay
 
                 dataGridView1.DataSource = dataSource;
                 dataGridView1.AutoResizeColumns();
+
+                //remove each column
+                //skip first column of names
+                for (var j = 0; j < input.Columns.Count-1; j++){
+
+                    var bordaCountTemp = new Dictionary<int, int>();
+                    for (var i = 0; i < input.Columns.Count - 1; i++)
+                    {
+                        bordaCountTemp.Add(i, 0);
+                    }
+
+                    if (j == orderedList.First().Key){
+                        //dont test removing winner
+                        continue;
+                    }
+
+                    var removedValue=0;
+                    foreach (DataRow team in input.Rows)
+                    {
+                        for (var i = 0; i < input.Columns.Count - 1; i++)
+                        {
+                            if (i == j)
+                            {
+                                bordaCountTemp[i] = 0;
+                                removedValue = oneIndexing ? Convert.ToInt32(team.ItemArray[i + 1]) - 1 : Convert.ToInt32(team.ItemArray[i + 1]);
+                                break;
+                            }
+                        }
+                        for (var i = 0; i < input.Columns.Count - 1; i++)
+                        {
+                            var value = oneIndexing ? Convert.ToInt32(team.ItemArray[i + 1]) - 1 : Convert.ToInt32(team.ItemArray[i + 1]);
+                            if (value > removedValue){
+                                value--;
+                            }
+                            bordaCountTemp[i] += value;
+
+                        }
+                    }
+
+                    var orderedListTemp = bordaCountTemp.ToList().OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]);  
+
+                }
 
             }
             else

@@ -288,7 +288,7 @@ namespace VotingDay
 
         private void AnalyzeBorda(object sender, EventArgs e)
         {
-            _analyzeForm = new Borda(voteCounts, MovieTitleList);
+            _analyzeForm = new Borda(preferenceOrders, MovieTitleList);
             _analyzeForm.Show();
         }
 
