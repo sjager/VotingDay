@@ -12,6 +12,7 @@ namespace VotingDay
 {
     public partial class Plurality : Form
     {
+        public string exportFilePath;
         public Plurality(DataTable input, List<string> movieTitles)
         {
 
@@ -60,11 +61,21 @@ namespace VotingDay
             DisplayPreferences.AutoResizeColumns();
         }
 
-     
-
         private void DismissButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            Exporter exporter = new Exporter(DisplayPreferences);
+            exportFilePath = exporter.ExportToExcel("Round1_Amirite.xls");
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath);
+            emailForm.Show();
         }
     }
 }

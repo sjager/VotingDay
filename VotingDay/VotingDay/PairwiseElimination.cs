@@ -12,6 +12,7 @@ namespace VotingDay
 {
     public partial class PairwiseElimination : Form
     {
+        public string exportFilePath;
         private DataTable data;
         private List<string> movies; 
 
@@ -84,6 +85,20 @@ namespace VotingDay
         private void DismissButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+
+            Exporter exporter = new Exporter(dataGridView1);
+            exportFilePath = exporter.ExportToExcel("Round6_Amirite.xls");
+
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath);
+            emailForm.Show();
         }
     }
 }
