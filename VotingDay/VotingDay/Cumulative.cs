@@ -60,5 +60,11 @@ namespace VotingDay
         {
             this.Hide();
         }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            Exporter exporter = new Exporter(cumulativeAnalysisDataGrid);
+            exporter.ExportToExcel("Round2_Amirite");
+        }
     }
 }

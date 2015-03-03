@@ -12,6 +12,9 @@ namespace VotingDay
 {
     public partial class Approval : Form
     {
+
+        public string exportFilePath;
+
         public Approval(DataTable input)
         {
             InitializeComponent();
@@ -43,6 +46,8 @@ namespace VotingDay
 
             approvalAnalysisDataGrid.Columns.AddRange(new DataGridViewColumn[] { rankCol, nameCol, votesCol });
 
+            approvalAnalysisDataGrid.Rows.Add("Rank", "Name", "Votes");
+
             int rank = 1;
             foreach (Candidate c in results.Candidates)
             {
@@ -61,9 +66,17 @@ namespace VotingDay
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
-            EmailForm emailForm = new EmailForm();
+
+            Exporter exporter = new Exporter(approvalAnalysisDataGrid);
+            exportFilePath = exporter.ExportToExcel("Round3_Amirite.xls");
+            
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath);
             emailForm.Show();
         }
     }
