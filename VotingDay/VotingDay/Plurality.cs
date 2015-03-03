@@ -17,48 +17,47 @@ namespace VotingDay
         {
 
             InitializeComponent();
-            
-            Dictionary<int, int> dictionary =
-	            new Dictionary<int, int>();
 
-            for (int i = 0; i <input.Rows.Count; i++){
-                dictionary.Add( Convert.ToInt32(input.Rows[i][0]), Convert.ToInt32(input.Rows[i][2]));
-            }
+            var candidateList = new List<Candidate>();
 
-            //sort dictionary
-            List<KeyValuePair<int, int>> myList = dictionary.ToList();
-
-            myList = myList.OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]).ToList();
-
-
-            //myList.Sort(
-            //    delegate(KeyValuePair<int, int> firstPair,
-            //    KeyValuePair<int, int> nextPair)
-            //    {
-            //        return nextPair.Value.CompareTo(firstPair.Value);
-            //    }
-            //);
-
-            IDictionary<int, int> sortedDictionary =
-                myList.ToDictionary(pair => pair.Key, pair => pair.Value);
-
-            DataTable table = new DataTable("Order");
-
-            table.Columns.Add("id", typeof(int));
-            table.Columns.Add("name", typeof (string));
-            table.Columns.Add("count", typeof(int));
-            foreach (int id in sortedDictionary.Keys)
+            foreach (DataRow dr in input.Rows)
             {
-                DataRow newRow = table.Rows.Add();
-                object[] rowArray = new object[3];
-                rowArray[0] = id;
-                rowArray[1] = id < movieTitles.Count() ? movieTitles[id] : "";
-                rowArray[2] = sortedDictionary[id];
-                newRow.ItemArray = rowArray;
+                Candidate rowCandidate = new Candidate()
+                {
+                    Name = dr[1].ToString(),
+                    Votes = Int16.Parse(dr[2].ToString())
+                };
+
+                candidateList.Add(rowCandidate);
             }
 
-            DisplayPreferences.DataSource = table;
-            DisplayPreferences.AutoResizeColumns();
+            var results = new VotingResults(candidateList);
+
+            DisplayPreferences.ReadOnly = true;
+
+            var nameCol = new DataGridViewTextBoxColumn();
+            var votesCol = new DataGridViewTextBoxColumn();
+            var rankCol = new DataGridViewTextBoxColumn();
+
+            nameCol.HeaderText = "Name";
+            votesCol.HeaderText = "Votes";
+            rankCol.HeaderText = "Rank";
+
+            DisplayPreferences.Columns.AddRange(new DataGridViewColumn[] { rankCol, nameCol, votesCol });
+
+            DisplayPreferences.Rows.Add("Rank", "Name", "Votes");
+
+            int rank = 1;
+            foreach (Candidate c in results.Candidates)
+            {
+                AddRow(c, rank);
+                rank++;
+            }
+        }
+
+        public void AddRow(Candidate candidate, int rank)
+        {
+            DisplayPreferences.Rows.Add(rank, candidate.Name, candidate.Votes);
         }
 
         private void DismissButton_Click(object sender, EventArgs e)
