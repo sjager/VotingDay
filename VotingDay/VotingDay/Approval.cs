@@ -43,6 +43,8 @@ namespace VotingDay
 
             approvalAnalysisDataGrid.Columns.AddRange(new DataGridViewColumn[] { rankCol, nameCol, votesCol });
 
+            approvalAnalysisDataGrid.Rows.Add("Rank", "Name", "Votes");
+
             int rank = 1;
             foreach (Candidate c in results.Candidates)
             {
@@ -59,6 +61,12 @@ namespace VotingDay
         private void DismissButton_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Exporter exporter = new Exporter(approvalAnalysisDataGrid);
+            exporter.ExportToExcel("Round3_Amirite.xls");
         }
     }
 }
