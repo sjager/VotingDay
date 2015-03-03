@@ -288,7 +288,7 @@ namespace VotingDay
 
         private void AnalyzeBorda(object sender, EventArgs e)
         {
-            _analyzeForm = new Borda(voteCounts, MovieTitleList);
+            _analyzeForm = new Borda(preferenceOrders, MovieTitleList);
             _analyzeForm.Show();
         }
 
@@ -350,6 +350,17 @@ namespace VotingDay
                     }
                 }
             }
-        } 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                Paste.PasteInData(ref this.VoteCounts);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }

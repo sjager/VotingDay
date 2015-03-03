@@ -86,6 +86,7 @@
     <Compile Include="PairwiseElimination.Designer.cs">
       <DependentUpon>PairwiseElimination.cs</DependentUpon>
     </Compile>
+    <Compile Include="Paste.cs" />
     <Compile Include="Plurality.cs">
       <SubType>Form</SubType>
     </Compile>
