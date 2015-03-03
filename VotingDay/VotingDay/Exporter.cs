@@ -18,7 +18,7 @@ namespace VotingDay
             this.dataGridView = dg;
         }
 
-        public void ExportToExcel(string filename)
+        public string ExportToExcel(string filename)
         {
             Excel.Application xlApp ;
             Excel.Workbook xlWorkBook ;
@@ -51,15 +51,24 @@ namespace VotingDay
             cellRange.Interior.Color = ConvertColour(Color.Yellow);
 
 
+
             xlWorkBook.SaveAs(filename, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+
+            string absfilepath = xlApp.DefaultFilePath.ToString() +"\\" + filename;
+            
+            
             xlWorkBook.Close(true, misValue, misValue);
             xlApp.Quit();
+
+            
 
             releaseObject(xlWorkSheet);
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
 
             MessageBox.Show("Excel file created");
+
+            return absfilepath;
         }
 
         public static int ConvertColour(Color colour)

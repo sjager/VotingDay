@@ -12,6 +12,9 @@ namespace VotingDay
 {
     public partial class Approval : Form
     {
+
+        public string exportFilePath;
+
         public Approval(DataTable input)
         {
             InitializeComponent();
@@ -63,10 +66,18 @@ namespace VotingDay
             this.Hide();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exportButton_Click(object sender, EventArgs e)
         {
+
             Exporter exporter = new Exporter(approvalAnalysisDataGrid);
-            exporter.ExportToExcel("Round3_Amirite.xls");
+            exportFilePath = exporter.ExportToExcel("Round3_Amirite.xls");
+            
+        }
+
+        private void sendEmailButton_Click(object sender, EventArgs e)
+        {
+            EmailForm emailForm = new EmailForm(exportFilePath);
+            emailForm.Show();
         }
     }
 }
