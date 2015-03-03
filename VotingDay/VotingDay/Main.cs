@@ -161,7 +161,7 @@ namespace VotingDay
             }
             else
             {
-                //TODO display error of some sort ("ItemCount must be an int before Borda Voting").
+                MessageBox.Show("ItemCount must be an int before Borda Voting");
             }
         }
 
@@ -200,7 +200,7 @@ namespace VotingDay
             }
             else
             {
-                //TODO display error of some sort ("ItemCount must be an int before Borda Voting").
+                MessageBox.Show("ItemCount must be an int before Borda Voting");
             }
         }
 
@@ -242,7 +242,8 @@ namespace VotingDay
             }
             else
             {
-                //TODO display error of some sort (Round number must be an int you dummy!).
+                MessageBox.Show("Round number must be an int you dummy!");
+
             }
         }
 

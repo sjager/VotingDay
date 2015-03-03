@@ -155,7 +155,7 @@ namespace VotingDay
             }
             else
             {
-                //TODO error
+                MessageBox.Show("Zero or one indexing is not found");
             }
         }
 

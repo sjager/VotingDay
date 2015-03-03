@@ -27,23 +27,23 @@ namespace VotingDay
             var numberOfRounds = Math.Log(numberOfContestants, 2);
             if (numberOfRounds - Math.Floor(numberOfRounds) == 0.0)
             {
-                numberOfRounds = (int)numberOfRounds;
+                numberOfRounds = (int) numberOfRounds;
                 outTable = new DataTable("");
-                outTable.Columns.Add("MovieTitle", typeof(string));
+                outTable.Columns.Add("MovieTitle", typeof (string));
                 for (var i = 1; i <= numberOfRounds; i++)
                 {
-                    outTable.Columns.Add("Round " + i, typeof(int));
+                    outTable.Columns.Add("Round " + i, typeof (int));
                 }
                 for (var i = 0; i < numberOfContestants; i++)
                 {
-                    var rowData = new object[(int)numberOfRounds + 1];
+                    var rowData = new object[(int) numberOfRounds + 1];
                     rowData[0] = movies[i];
                     outTable.Rows.Add(rowData);
                 }
                 for (var i = 1; i <= numberOfRounds; i++)
                 {
                     // for each bracket
-                    for (var j = 0; j < numberOfContestants; j = j + (int)Math.Pow(2, i))
+                    for (var j = 0; j < numberOfContestants; j = j + (int) Math.Pow(2, i))
                     {
                         var contestants = new List<int>();
                         // foreach contestant in the bracket, find the two contestants
@@ -69,9 +69,9 @@ namespace VotingDay
 
                 var paretoDominated = new List<int>();
                 var paretoDominates = new List<int>();
-                for (var i = 0; i < indata.Columns.Count-1; i++)
+                for (var i = 0; i < indata.Columns.Count - 1; i++)
                 {
-                    for (var j = 0; j < indata.Columns.Count-1; j++)
+                    for (var j = 0; j < indata.Columns.Count - 1; j++)
                     {
                         if (IsParetoDominated(i, j))
                         {
@@ -81,7 +81,7 @@ namespace VotingDay
                     }
                 }
 
-                
+
                 if (!paretoDominated.Any())
                 {
                     Debug.WriteLine("No Pareto Domination exists");
@@ -93,22 +93,23 @@ namespace VotingDay
                         int underdog;
                         if (GetPlace(paretoDominated[i]) > GetPlace(paretoDominates[i]))
                         {
-                            Debug.WriteLine(movies[paretoDominated[i]] + " was dominated by " + movies[paretoDominates[i]] +
-                                          " but finished higher");
+                            Debug.WriteLine(movies[paretoDominated[i]] + " was dominated by " +
+                                            movies[paretoDominates[i]] +
+                                            " but finished higher");
                             break;
                         }
                     }
-                    for(var i = 0; i < paretoDominated.Count; i++)
+                    for (var i = 0; i < paretoDominated.Count; i++)
                     {
                         int temp1 = -1, temp2 = -2;
-                        for (var j = 0; j < indata.Columns.Count-1; j++)
+                        for (var j = 0; j < indata.Columns.Count - 1; j++)
                         {
                             if (paretoDominates[i] != j && EvaluateWinner(paretoDominates[i], j) == j)
                             {
                                 temp1 = j;
                             }
                         }
-                        for (var j = 0; j < indata.Columns.Count-1; j++)
+                        for (var j = 0; j < indata.Columns.Count - 1; j++)
                         {
                             if (paretoDominated[i] != j && EvaluateWinner(paretoDominated[i], j) == paretoDominated[i])
                             {
@@ -118,12 +119,17 @@ namespace VotingDay
                         if (temp1 >= 0 && temp2 >= 0)
                         {
                             // condition for underdog winning has been found.
-                            Debug.WriteLine("\"Pareto dominated\" " + movies[paretoDominated[i]] + " beats " + movies[temp2] + " and \"pareto dominating\" " +
-                            movies[paretoDominates[i]] + " is beaten by " + movies[temp1]);
+                            Debug.WriteLine("\"Pareto dominated\" " + movies[paretoDominated[i]] + " beats " +
+                                            movies[temp2] + " and \"pareto dominating\" " +
+                                            movies[paretoDominates[i]] + " is beaten by " + movies[temp1]);
                             break;
                         }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Number of items must be a power of 2");
             }
         }
 
