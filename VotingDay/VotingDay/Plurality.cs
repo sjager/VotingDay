@@ -27,14 +27,16 @@ namespace VotingDay
             //sort dictionary
             List<KeyValuePair<int, int>> myList = dictionary.ToList();
 
+            myList = myList.OrderByDescending(x => x.Value).ThenBy(x => movieTitles[x.Key]).ToList();
 
-            myList.Sort(
-                delegate(KeyValuePair<int, int> firstPair,
-                KeyValuePair<int, int> nextPair)
-                {
-                    return nextPair.Value.CompareTo(firstPair.Value);
-                }
-            );
+
+            //myList.Sort(
+            //    delegate(KeyValuePair<int, int> firstPair,
+            //    KeyValuePair<int, int> nextPair)
+            //    {
+            //        return nextPair.Value.CompareTo(firstPair.Value);
+            //    }
+            //);
 
             IDictionary<int, int> sortedDictionary =
                 myList.ToDictionary(pair => pair.Key, pair => pair.Value);
